@@ -1,65 +1,48 @@
+import { ImGithub, ImArrowRight2 } from 'react-icons/im';
+
+import styles from '../styles/pages/Login.module.css';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { GetServerSideProps } from 'next';
+import { useState } from 'react';
 
-import { CompletedChallenges } from '../components/CompletedChallenges';
-import { Countdown } from '../components/Countdown';
-import { ExperienceBar } from '../components/ExperienceBar';
-import { Profile } from '../components/Profile';
-import { ChallengeBox } from '../components/ChallengeBox';
+export default function Login() {
+  const { push } = useRouter();
 
-import styles from '../styles/pages/Home.module.css';
-import { CountdownProvider } from '../contexts/CountdownContext';
-import { ChallengesProvider } from '../contexts/ChallengesContext';
-import { Sidebar } from '../components/Sidebar';
+  const [username, setUsername] = useState('');
 
-interface HomeProps {
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
-}
-
-export default function Home(props: HomeProps) {
-  return (
-    <ChallengesProvider
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}
-    >
-      <div className={styles.container}>
-        <Head>
-          <title>Início | move.it</title>
-        </Head>
-
-        <Sidebar />
-        <div className={styles.content}>
-          <ExperienceBar />
-
-          <CountdownProvider>
-            <section>
-              <div>
-                <Profile />
-                <CompletedChallenges />
-                <Countdown />
-              </div>
-              <div>
-                <ChallengeBox />
-              </div>
-            </section>
-          </CountdownProvider>
-        </div>
-      </div>
-    </ChallengesProvider>
-  )
-}
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
-
-  return {
-    props: {
-      level: Number(level),
-      currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted)
+  function handleSubmit(e) {
+    e.preventDefault();
+    if(username) {
+      push(`/${username}`);
     }
   }
-} 
+
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Home | move.it</title>
+      </Head>
+
+      <div className={styles.content}>
+        <img src="/icons/logo-moveit.svg" alt=""/>
+        <strong>Bem-vindo</strong>
+
+        <div className={styles.github}>
+          <ImGithub size={36} />
+          <span>Faça login com seu Github para começar</span>
+        </div>
+        
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            required placeholder="Digite seu username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <button type="submit">
+            <ImArrowRight2 size={24} />
+          </button>
+        </form>
+      </div>
+    </div>
+  )
+}

@@ -1,0 +1,125 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  
+  background: url(/icons/logo-bg.svg) no-repeat top left, var(--blue);
+  color: var(--white);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  width: 50%;
+  margin-left: 55%;
+  display: grid;
+}
+
+.content img {
+  height: 76px;
+}
+
+.content strong {
+  margin: 5rem 0 2rem;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .content {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.github {
+  display: flex;
+  margin-bottom: 1rem;
+  color: var(--text-highlight);
+}
+
+.github span {
+  max-width: 220px;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+
+  font-size: 1rem;
+}
+
+.content form {
+  order: 0;
+
+  height: 80px;
+  max-width: 350px;
+  padding: 5px;
+
+  display: flex;
+  justify-content: space-between;
+
+  background: linear-gradient(96.07deg, var(--blue-dark) -19.93%, var(--blue) 100%);
+  border-radius: 5px;
+}
+
+.content form:hover {
+  /* background: var(--blue-dark); */
+  filter: brightness(0.9);
+  border: 1px solid var(--blue-dark);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
+}
+
+.content input {
+  order: 1;
+
+  width: 100%;
+  padding: 10px;
+  margin-right: 5px;
+
+  color: var(--white);
+  background: transparent;
+  border: none;
+}
+
+.content input::placeholder {
+  color: var(--text-highlight);;
+}
+
+.content input:focus {
+  outline: transparent;
+}
+
+.content input:valid + button {
+  background: var(--green);
+}
+
+.content button {
+  order: 2;
+
+  width: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--blue-dark);
+  border: none;
+  border-radius: 5px
+}
+
+.content button svg {
+  color: var(--white);
+}
+
+.content button:focus {
+  outline: transparent;
+}
+
+@media (max-width: 768px) {
+  .buttons {
+    display: flex;
+    flex-direction: row;
+  }
+  .buttons button div {
+    visibility: hidden;
+    display: none;
+  }
+}
